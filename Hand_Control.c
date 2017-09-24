@@ -3,6 +3,7 @@
 
 #include <xc.h>
 #include "esp8266_functions.h"
+#include "servo.h"
 
 #pragma config FOSC = HS        // Oscillator Selection bits (HS oscillator)
 #pragma config WDTE = OFF       // Watchdog Timer Enable bit (WDT disabled)
@@ -35,25 +36,26 @@ void main()
     b[2] = '2';
     b[3] = '3';
     b[4] = '4';
+    TRISB = 0;
     ////////////////////////////////////////////////////////////////////////////
     while(1)
     {
           esp8266_receive(data, 1, true);//receive command
           
           if (data[0] == b[0]){
-              //do something
+              CerrarMano();
           }
           if (data[0] == b[1]){
-              //do something
+              ManoAbierta();
           }
           if (data[0] == b[2]){
-              //do something
+              ManoSenalando();
           }
           if (data[0] == b[3]){
-              //do something
+              ManoOk();
           }
           if (data[0] == b[4]){
-              //do something
+              Llamado();
           }
     }
 
